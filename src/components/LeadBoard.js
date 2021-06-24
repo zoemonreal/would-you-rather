@@ -37,14 +37,23 @@ class LeadBoard extends Component {
   }
 }
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ users, questions }) {
 
 
   const usersScore= Object.keys(users).map((user) => {
     
-    const answers = Object.keys(users[user].answers).length;
-    const questions = users[user].questions.length;
-    const score = answers + questions;
+    let answers = 0;
+    let questions_count = 0;
+     Object.values(questions).forEach((question) => {
+        if (question.optionOne.votes.includes(user) || question.optionTwo.votes.includes(user)){
+          answers++;
+        }
+        if(question.author===user){
+          questions_count++;
+        }
+     });
+   // const questions = //users[user].questions.length;
+    const score = answers + questions_count;
 
 
     return {
@@ -52,7 +61,7 @@ function mapStateToProps({ users, authedUser }) {
         name: users[user].name,
         avatarUrl: users[user].avatarURL,
         answeredResults: answers ,
-        questionsResults: questions,    
+        questionsResults: questions_count,    
         score: score
     };
   })

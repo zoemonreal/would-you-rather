@@ -7,7 +7,9 @@ import { setAuthedUser } from '../actions/authedUser';
 class Login extends Component {
     state = {
       userId: "",
+      prevPath:""
     }
+      
     handleChange = (e) => {
       const optionValue = e.target.value
   
@@ -23,13 +25,17 @@ class Login extends Component {
       const { userId } = this.state
 
       const { dispatch} = this.props
-  
-      dispatch(setAuthedUser(userId));  
-      this.setState(() => ({
+
+      const { from } = this.props.location.state || { from: { pathname: '/' }
+      };
+      dispatch(setAuthedUser(userId));
+      this.props.history.push(from);
+
+      // this.setState(() => ({
         
-        toHome: userId ? false : true,
+      //   toHome: userId ? false : true,
   
-      }))
+      // }))
     }
     render() {
       const { userId, toHome } = this.state
@@ -41,7 +47,7 @@ class Login extends Component {
   
       return (
         
-        <div>
+        <div>        
           <h4 className="center">Would you rather..<img src="https://cdn0.iconfinder.com/data/icons/education-collection-2/32/question_mark_online-512.png"  
           className="center avatar" alt=""/>  </h4>
       <div className="">

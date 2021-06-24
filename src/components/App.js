@@ -12,7 +12,7 @@ import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 
 import Login from './Login'
-import { BrowserRouter as Router, Switch , Route} from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import Nav from './Nav'
 
 
@@ -45,8 +45,8 @@ class App extends Component {
                   <PrivateRoute path='/leadboard' component={LeadBoard} authedUser={this.props.authedUser}/>
 
                   <PublicRoute restricted={true} path='/login'  component={Login} authedUser={this.props.authedUser} />
-                  <Route component={Error} />
-              </Switch>
+                  <PrivateRoute component={Error} authedUser={this.props.authedUser} />
+               </Switch>
       
                 </div>}
           </div>

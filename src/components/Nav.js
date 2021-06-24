@@ -13,7 +13,7 @@ class Nav extends Component {
       const { dispatch} = this.props
   
       dispatch(setAuthedUser(null));  
-     
+
     }
   render (){
     return( <nav className='nav-wrapper '>

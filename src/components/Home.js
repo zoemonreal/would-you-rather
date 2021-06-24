@@ -35,6 +35,7 @@ class Home extends Component {
   }
   render() {
     const {questionsUnAnswered , questionsAnswered} =this.state
+    const {userQuestionsUnAnswered, userQuestionsAnswered } = this.props
     return (
       <div className="col s12 m7">
       <h3 className='center'>Questions</h3>
@@ -51,7 +52,8 @@ class Home extends Component {
       {questionsUnAnswered &&
       <div id="test4">  
         <ul className=''>
-            {this.props.userQuestionsUnAnswered.map((user) => (
+            {userQuestionsUnAnswered.length === 0 && <h5>All questions answered!</h5>}
+            {userQuestionsUnAnswered.map((user) => (
               <li key={user.id}>
                 <Question id={user.id} />
               </li>
@@ -61,7 +63,9 @@ class Home extends Component {
         {questionsAnswered &&
       <div id="test4">  
         <ul className=''>
-            {this.props.userQuestionsAnswered.map((user) => (
+        {userQuestionsAnswered.length === 0 && <h5>There's not questions answered!</h5>}
+
+            {userQuestionsAnswered.map((user) => (
               <li key={user.id}>
                 <Question id={user.id} />
               </li>

@@ -4,6 +4,8 @@ import { formatQuestion } from '../utils/helpers'
 import { withRouter } from 'react-router-dom'
 import QuestionResults  from './QuestionResults';
 import QuestionPoll  from './QuestionPoll';
+import Error from './ErrorPage'
+
 
 
 class QuestionPage extends Component {
@@ -13,7 +15,7 @@ class QuestionPage extends Component {
       const { question, answered} = this.props
   
       if (question === null) {
-        return <p>This question doesn't exists</p>
+        return <Error/>
       }
   
       const {
@@ -34,7 +36,7 @@ class QuestionPage extends Component {
     const { id } = props.match.params
 
     const question = questions[id]; 
-    const answered=  question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser);
+    const answered=  question && (question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser));
 
   
     return {
